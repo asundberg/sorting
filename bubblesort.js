@@ -1,20 +1,32 @@
-function bubbleSort(array) {
-    var tempItem;
-    // loop over each item in the array
-    for (i = 0; i < array.length; i++) {
-        // check if current item is greater than next item
-        if (array[i] > array[i + 1]) {
-            // if it is, assign the next item to tempItem var
-            tempItem = array[i + 1];
-            // make the next item the current item, i.e. swap them
-            array[i + 1] = array[i];
-            // make current item the temp item
-            array[i] = tempItem;
-            // since we've swapped items, make i return two indices
-            i = i - 2;
+function bubbleSort(array) { // O(n*n) or O(n^2)
+    var sorted = false; // O(1)
+    // loop over each item in the array & keep doing the inner loop until it's sorted
+    for(var end = array.length; end > 0 && !sorted; end--) { // passes // O(n*n1)
+        sorted = true; // assume until proven incorrect
+        // go down and swap things
+        for(var j = 0; j < array.length; j++) { // bubbling // O(n*1)
+            if(!inOrder(array, j)) { // O(1)
+                swap(array, j); // O(?)
+                sorted = false; // O(1)
+            }
         }
     }
-    return array;
+    return array; // O(1)
 }
 
-console.log(bubbleSort([3, 1, 9, 23, 24, 90, 0]));
+// making this global because we will put a spy function in our test specs, because we need to keep track of number of comparisons, so this makes it easier to spy.
+function inOrder(array, index) { // O(?)
+    if(index === array.length - 1) {
+        return true; // O(1)
+    }
+    return array[index] < array[index + 1]; // O(1)
+}
+
+function swap(array, index) { // side effects - no need to create a copy of the array; instead we are manipulating the array. // O(1)
+    var oldLeftValue = array[index]; // O(1)
+    array[index] = array[index + 1]; // O(1)
+    array[index + 1] = oldLeftValue; // O(1)
+}
+
+// [1, 2, 3, 4, ..........]
+// [3, 1, 9, 23, 24, 90, 0]
