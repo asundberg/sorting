@@ -32,7 +32,7 @@ describe('Merge Sort', function() {
 	it('is able to sort a non-ordered array', function() {
 		expect(mergeSort([2, 1])).toEqual([1, 2]);
 		expect(mergeSort([6, 3, 7, 11, 2])).toEqual([2, 3, 6, 7, 11]);
-		expect(mergeSort([3, 6, 76, 1, 8, 20, 102, 9, 37, 2, 11, 88, 4])).toEqual([1, 2, 3, 4, 6, 8, 9, 11, 20, 37, 76, 88, 102]);
+		expect(mergeSort([367, 3, 6, 76, 1, 8, 20, 102, 9, 37, 2, 11, 88, 4])).toEqual([1, 2, 3, 4, 6, 8, 9, 11, 20, 37, 76, 88, 102, 367]);
 	});
 });
 
