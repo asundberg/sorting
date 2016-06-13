@@ -1,18 +1,20 @@
 'use strict';
 
-function bubblesort(arr) { // [7, 2]
-	var swaps = 0;
-	for(var i = 0; i < arr.length - 1; i++) {
-		var currentVal = arr[i];
-		var nextVal = arr[i + 1]; 
-		if(currentVal > nextVal) {
-			swaps++;
-			arr[i] = nextVal;
-			arr[i + 1] = currentVal;
-		}
-	}
-	if(swaps > 0) {
-		return bubblesort(arr);
-	}
-	return arr;
+function bubbleSort(argument) {
+  var holder ;
+  var swaps = 0;
+  if(argument.length>=2){
+    for (var i = 0; i < argument.length-1; i++) {
+      if (argument[i]>argument[i+1]){
+        holder=argument[i];
+        argument[i]=argument[i+1];
+        argument[i+1]=holder;
+        swaps++;
+      }
+    }
+    if(swaps !== 0) {
+      return bubbleSort(argument);
+    }
+  }
+  return argument;
 }

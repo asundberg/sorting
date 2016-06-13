@@ -1,39 +1,51 @@
 'use strict'
 
-function split(arr) { 
-	var result = []; 
-	var slicePoint = Math.floor(arr.length / 2);  
-	var firstHalf = arr.slice(0, slicePoint); 
-	var secondHalf = arr.slice(slicePoint); 
-	result.push(firstHalf);
-    result.push(secondHalf);
-	return result; 
+function split(wholeArray) {
+  /* your code here to define the firstHalf and secondHalf arrays */
+  var splitPoint = Math.floor(wholeArray.length / 2); // 9
+  var firstHalf = wholeArray.slice(0, splitPoint);
+  var secondHalf = wholeArray.slice(splitPoint);
+  return [firstHalf, secondHalf];
 }
 
-function merge(arr1, arr2) { // 
-	var result = []; // 
-	var j = 0;
-	for(var i = 0; i < arr1.length; i++) { 
-		for(; j < arr2.length; j++) { 
-			if(arr1[i] > arr2[j]) {
-				result.push(arr2[j]);
-			} else {
-				break;
-			}
-		}
-		result.push(arr1[i]);
-	}
-	return result.concat(arr2.slice(j)); 
+function merge(arr1, arr2) {
+    var resultArr = [];
+    while(arr1.length && arr2.length) {
+        if(arr1[0] < arr2[0]) {
+            resultArr.push(arr1.shift());
+        } else {
+            resultArr.push(arr2.shift());
+        }
+    }
+    return resultArr.concat(arr1, arr2);
 }
 
-function mergeSort(arr) { 
-	if(arr.length <= 1) {
-		return arr;
-	} else {
-		var splitArr = split(arr); 
-		return merge(mergeSort(splitArr[0]), mergeSort(splitArr[1]));
-	}
+function mergeSort(array) {
+    var resultArr = [];
+    if (array.length <=1){
+        return array;
+    }
+    var splitArr = split(array);
+    return resultArr.concat(merge(mergeSort(splitArr[0]), mergeSort(splitArr[1])));
+
 }
 
 
+// BONUS:
 
+function mergeCustom(arr1, arr2) {
+    var resultArr = [];
+    function comparator(a,b) {
+        if (a>b ){ return 1}
+        else if (a<b) {return -1}
+        else return 0;
+    }
+    while(arr1.length && arr2.length) {
+        if(comparator(arr1[0], arr2[0])===-1) {
+            resultArr.push(arr1.shift());
+        } else {
+            resultArr.push(arr2.shift());
+        }
+    }
+    return resultArr.concat(arr1, arr2);
+}
